@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="100%" height="100%" fill="#fff1f2" />
+  <text x="50%" y="48%" font-size="140" text-anchor="middle" fill="#ef4444">🔑</text>
+  <text x="50%" y="72%" font-size="48" text-anchor="middle" fill="#b91c1c">Keys</text>
+</svg>

@@ -5,23 +5,14 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, MapPin, ArrowLeft, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
+import allItems from "@/lib/mockItems";
 
 const ItemDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // Mock data - in a real app, this would be fetched based on the id
-  const item = {
-    id: id || "1",
-    title: "Black Leather Wallet",
-    description: "Black leather wallet with ID cards and credit cards inside. It has a small scratch on the back and a red thread on one of the card slots. Last seen near the fountain in Central Park.",
-    category: "Wallet",
-    location: "Central Park, NYC",
-    date: "March 15, 2024",
-    status: "lost" as const,
-    contact: "john.doe@example.com",
-    additionalInfo: "Contains important documents. Reward offered for return.",
-  };
+  // Lookup item from shared mock data
+  const item = allItems.find((it) => it.id === id) || allItems[0];
 
   return (
     <div className="min-h-screen bg-background">
@@ -69,11 +60,27 @@ const ItemDetail = () => {
               </div>
             </div>
 
-            {/* Image Placeholder */}
+            {/* Image */}
             <div className="aspect-video w-full overflow-hidden rounded-lg bg-muted">
-              <div className="flex h-full items-center justify-center bg-gradient-card">
-                <span className="text-8xl opacity-20">📦</span>
-              </div>
+              {item.imageUrl ? (
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  loading="lazy"
+                  onError={(e) => {
+                    const t = e.currentTarget as HTMLImageElement;
+                    if (!t.dataset.error) {
+                      t.dataset.error = "1";
+                      t.src = "/placeholder.svg";
+                    }
+                  }}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center bg-gradient-card">
+                  <span className="text-8xl opacity-20">📦</span>
+                </div>
+              )}
             </div>
 
             <Card>

@@ -12,18 +12,30 @@ interface ItemCardProps {
   location: string;
   date: string;
   status: "lost" | "found";
-  image?: string;
+  // ✅ CHANGE: Rename 'image' to 'imageUrl' to match mock data
+  imageUrl?: string; 
 }
 
-const ItemCard = ({ id, title, description, category, location, date, status, image }: ItemCardProps) => {
+// ✅ CHANGE: Destructure 'imageUrl' here instead of 'image'
+const ItemCard = ({ id, title, description, category, location, date, status, imageUrl }: ItemCardProps) => {
   return (
     <Link to={`/item/${id}`}>
       <Card className="overflow-hidden transition-all hover:shadow-lg hover:-translate-y-1 animate-scale-in">
         <div className="relative h-48 overflow-hidden bg-muted">
-          {image ? (
-            <img 
-              src={image} 
-              alt={title} 
+          {/* ✅ CHANGE: Use 'imageUrl' in the conditional check and src attribute */}
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={title}
+              loading="lazy"
+              onError={(e) => {
+                // Fallback to local placeholder if external image fails to load
+                const t = e.currentTarget as HTMLImageElement;
+                if (!t.dataset.error) {
+                  t.dataset.error = "1";
+                  t.src = "/placeholder.svg";
+                }
+              }}
               className="h-full w-full object-cover transition-transform hover:scale-105"
             />
           ) : (

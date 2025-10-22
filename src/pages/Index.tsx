@@ -4,47 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Search, Plus, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ItemCard from "@/components/ItemCard";
+import allItems from "@/lib/mockItems";
 
 const Index = () => {
-  // Mock data for recent items
-  const recentItems = [
-    {
-      id: "1",
-      title: "Black Leather Wallet",
-      description: "Black leather wallet with ID cards and credit cards inside",
-      category: "Wallet",
-      location: "Central Park, NYC",
-      date: "2 hours ago",
-      status: "lost" as const,
-    },
-    {
-      id: "2",
-      title: "iPhone 13 Pro",
-      description: "Blue iPhone 13 Pro with cracked screen protector",
-      category: "Electronics",
-      location: "Starbucks, 5th Ave",
-      date: "5 hours ago",
-      status: "found" as const,
-    },
-    {
-      id: "3",
-      title: "Silver Bracelet",
-      description: "Silver charm bracelet with heart pendant",
-      category: "Jewelry",
-      location: "Brooklyn Bridge",
-      date: "1 day ago",
-      status: "lost" as const,
-    },
-    {
-      id: "4",
-      title: "Blue Backpack",
-      description: "Nike blue backpack with laptop and textbooks",
-      category: "Bag",
-      location: "NYU Campus",
-      date: "2 days ago",
-      status: "found" as const,
-    },
-  ];
+  // Use shared mock items and show the first four as recent
+  const recentItems = allItems.slice(0, 4);
 
   return (
     <div className="min-h-screen bg-background">

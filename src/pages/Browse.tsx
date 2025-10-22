@@ -5,12 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, SlidersHorizontal } from "lucide-react";
+import allItems from "@/lib/mockItems";
 
 const Browse = () => {
   const [filter, setFilter] = useState("all");
   const [category, setCategory] = useState("all");
-
-  import allItems from "@/lib/mockItems";
 
   const filteredItems = allItems.filter(item => {
     const matchesStatus = filter === "all" || item.status === filter;
